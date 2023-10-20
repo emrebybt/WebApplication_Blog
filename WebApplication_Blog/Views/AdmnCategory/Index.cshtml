@@ -1,0 +1,67 @@
+﻿@model List<CategoryViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-border-all"></i>
+                </span> Bloglar
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th> Kategori İsmi </th>
+                                        <th> Kategori Açıklaması</th>
+                                        <th> Kategorideki Blog Sayısı </th>
+                                        <th> Status </th>
+                                        <th> İşlem </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @item.CategoryName
+                                            </td>
+                                            <td> @item.CategoryDescription </td>
+                                            <td> @item.BlogCount </td>
+                                            <td>
+                                                <label class="badge  @(item.CategoryStatus == true ? "badge-gradient-success":"badge-gradient-danger")">@(item.CategoryStatus == true ? "Online" : "Offline")</label>
+                                            </td>
+                                            <td> <a asp-controller="AdmnCategory" asp-action="CategoryStatus" asp-route-id="@item.CategoryId" class="btn btn-sm btn-outline-danger">@(item.CategoryStatus == true ? "Kaldır" : "Yayınla")</a> </td>
+                                            <td> <a asp-controller="AdmnCategory" asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-sm btn-outline-info">Düzenle</a> </td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

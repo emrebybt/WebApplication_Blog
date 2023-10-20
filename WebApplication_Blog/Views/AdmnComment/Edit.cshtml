@@ -1,0 +1,43 @@
+﻿@model CommentViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">@Model.CommentUserName adlı kişinin yorumu</h4>
+                        <form class="forms-sample" asp-action="CreateCategory" asp-controller="AdmnCategory" method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 form-group">
+                                    <label for="exampleInputName1">İsim</label>
+                                    <input asp-for="CommentUserName" class="form-control" type="text" id="exampleInputName1" placeholder="Your name" required="">
+                                </div>
+                                <div class="col-md-6 col-sm-12 form-group">
+                                    <label for="exampleInputName1">E-Posta</label>
+                                    <input asp-for="CommentEmail" type="text" class="form-control" id="exampleInputName1">
+                                </div>
+                                <div class="col-lg-12 form-group">
+                                    <label for="message">Yorum</label>
+                                    <textarea asp-for="CommentContent" class="form-control" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Gönder</button>
+                            <a asp-action="Index" asp-controller="AdmnComment" class="btn btn-light">İptal</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @await Component.InvokeAsync("AdminReplyComment",Model.CommentId)
+            
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,68 @@
+﻿@model List<CategoryViewModel>
+
+
+
+<div class="col-lg-4">
+    <div class="sidebar">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sidebar-item search">
+                    <form id="search_form" name="gs" method="GET" asp-controller="Blog" asp-action="Blogs">
+                        <input type="text" name="search" class="searchText" placeholder="Ara..." autocomplete="on">
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                        <h2>Son Postlar</h2>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            @foreach (var item in ViewBag.Blogs)
+                            {
+                                <li>
+                                    <a asp-controller="Blog" asp-action="BlogDetails" asp-route-id="@item.BlogId">
+                                        <h5>@item.BlogTitle</h5>
+                                        <span>@item.BlogCreateDate.ToString("dd-MMM-yyyy")</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                        <h2>Kategoriler</h2>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                <li><a asp-action="Blogs" asp-controller="Blog" asp-route-id="@item.CategoryId">@item.CategoryName</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="sidebar-item tags">
+                    <div class="sidebar-heading">
+                        <h2>Tagler</h2>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                <li><a href="#">@item.CategoryName</a></li>
+                            }
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

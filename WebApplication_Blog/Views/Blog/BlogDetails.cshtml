@@ -1,0 +1,65 @@
+﻿@model BlogViewModel
+
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/_AllBlogsLayout.cshtml";
+}
+@*@{
+
+    var tags = Model.BlogTags.Split(',').Select(tag => tag.Trim()).ToList();
+}*@
+<div class="col-lg-8">
+    <div class="all-blog-posts">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog-post">
+                    <div class="blog-thumb">
+                        <img src="@Model.BlogThumbnailImage" alt="">
+                    </div>
+                    <div class="down-content">
+                        <span>@Model.Category.CategoryName</span>
+                        <a href="post-details.html"><h4>@Model.BlogTitle</h4></a>
+                        <ul class="post-info">
+                            <li>@Model.BlogCreateDate.ToString("dd-MMM-yyyy")</li>
+                            <li>10 Yorum</li>
+                        </ul>
+                        <div>
+                                @Html.Raw(Model.BlogContent)
+                        </div>
+                        <div class="post-options">
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul class="post-tags">
+                                        <li><i class="fa fa-tags"></i></li>
+                                        @foreach (var item in Model.BlogTags.Split(",").ToList())
+                                        {
+                                            <li><a href="#">@item</a></li>
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <ul class="post-share">
+                                        <li><i class="fa fa-share-alt"></i></li>
+                                        <li><a href="#">Facebook</a>,</li>
+                                        <li><a href="#"> Twitter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Comment Adding Start Here -->
+            @await Html.PartialAsync("AddCommentPartial",new CommentViewModel{BlogId=Model.BlogId})
+            <!-- Comment Adding End Here -->
+            <!-- Comments Start Here -->
+
+            <div class="col-lg-12 mt-5">
+                <vc:comment id=@Model.BlogId></vc:comment>
+            </div>
+            <!-- Comments End Here -->
+
+        </div>
+    </div>
+</div> 

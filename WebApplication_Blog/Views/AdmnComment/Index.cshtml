@@ -1,0 +1,66 @@
+﻿@model List<CommentViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                    <i class="mdi mdi-border-all"></i>
+                </span> Bloglar
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th> Kategori İsmi </th>
+                                        <th> Kategori Açıklaması</th>
+                                        <th> Kategorideki Blog Sayısı </th>
+                                        <th> Status </th>
+                                        <th> İşlem </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @item.CommentUserName
+                                            </td>
+                                            <td> @item.CommentEmail </td>
+                                            <td>  </td>
+                                            <td>
+                                                <label class="badge  @(item.CommentStatus == true ? "badge-gradient-success":"badge-gradient-danger")">@(item.CommentStatus == true ? "Online" : "Offline")</label>
+                                            </td>
+                                            <td> <a asp-controller="AdmnComment" asp-action="CommentStatus" asp-route-id="@item.CommentId" class="btn btn-sm btn-outline-danger">@(item.CommentStatus == true ? "Kaldır" : "Yayınla")</a> </td>
+                                            <td> <a asp-controller="AdmnComment" asp-action="Edit" asp-route-id="@item.CommentId" class="btn btn-sm btn-outline-info">Düzenle</a> </td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

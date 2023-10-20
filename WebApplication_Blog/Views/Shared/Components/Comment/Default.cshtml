@@ -1,0 +1,50 @@
+﻿@model List<CommentViewModel>
+
+@if (Model.Count() == 0)
+{
+    <h4>Henüz Yorum Yok! İlk Yorumu Sen Yap.</h4>
+}
+else
+{
+
+    <div class="sidebar-item comments">
+        <div class="sidebar-heading">
+            <h2>@Model.Count() Adet Yorum</h2>
+        </div>
+        <div class="content">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li style="display:block">
+                        <div class="author-thumb">
+                            <img class="rounded-circle w-75" src="~/images/commentimage.png" alt="">
+                        </div>
+                        <div class="right-content">
+                            <h4>@item.CommentUserName<span>@item.CommentDate.ToString("dd-MMM-yyyy")</span></h4>
+                            <p>@item.CommentContent</p>
+                            <button class="btn btn-sm"  onclick="myFunction(@item.CommentId)">Yanıtla</button>
+                        </div>
+                        <div style="display:none" id="@item.CommentId">
+                            @await Html.PartialAsync("AddReplyCommentPartial", new ReplyCommentViewModel{CommentId = item.CommentId,BlogId = item.BlogId})
+                            
+                        </div>
+                    </li>
+                    @await Component.InvokeAsync("Reply",item.CommentId)
+                }
+
+            </ul>
+        </div>
+    </div>
+
+}
+
+<script>
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

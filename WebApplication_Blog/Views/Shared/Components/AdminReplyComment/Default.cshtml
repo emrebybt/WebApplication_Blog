@@ -1,0 +1,61 @@
+﻿@model List<ReplyCommentViewModel>
+
+<div class="col-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yoruma Gelen Cevaplar</h4>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> İsim </th>
+                            <th> E-posta </th>
+                            <th> İşlem </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.CommentUserName
+
+                                </td>
+                                <td>
+                                    @item.CommentEmail
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" onclick="myFunction(@item.ReplyCommentId)">Yorumu gör</a>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div style="display:none" id="@item.ReplyCommentId">
+                                        <div class="col-lg-6 form-group">
+                                            <label for="message">Yorum</label>
+                                            <textarea asp-for="@item.CommentContent" class="form-control" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

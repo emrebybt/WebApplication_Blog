@@ -1,0 +1,21 @@
+﻿@model List<CommentReply>
+
+
+@if (Model.Count() != 0)
+{
+    @foreach (var item in Model)
+    {
+        <li class="replied d-block">
+
+            <div class="author-thumb">
+                <img class="rounded-circle w-75" src="~/images/commentimage.png" alt="">
+            </div>
+            <div class="right-content">
+                <h4>@item.CommentUserName<span>@item.CommentDate.ToString("dd-MMM-yyyy")</span></h4>
+                <p>@item.CommentContent</p>
+            </div>
+
+        </li>
+    }
+
+}

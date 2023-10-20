@@ -1,0 +1,30 @@
+﻿@model List<BlogViewModel>
+
+
+
+<div class="main-banner header-text">
+    <div class="container-fluid">
+        <div class="owl-banner owl-carousel">
+            @foreach (var item in Model)
+                {
+                <div class="item">
+                    <img src="@item.BlogThumbnailImage" alt="">
+                    <div class="item-content">
+                        <div class="main-content">
+                            <div class="meta-category">
+                                <span>@item.Category.CategoryName</span>
+                            </div>
+                            <a asp-route-id="@item.BlogId" asp-action="BlogDetails" asp-controller="Blog"><h4>@item.BlogTitle</h4></a>
+                            <ul class="post-info">
+                                <li>Admin</li>
+                                <li>@item.BlogCreateDate.ToString("dd-MMM-yyyy")</li>
+                                <li>12 Comments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

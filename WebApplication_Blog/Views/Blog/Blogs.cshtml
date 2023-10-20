@@ -1,0 +1,75 @@
+﻿@model List<BlogViewModel>
+@{
+    ViewData["Title"] = "Blogs";
+    Layout = "~/Views/Shared/_AllBlogsLayout.cshtml";
+}
+@{
+    var pageSize = 6; // Her sayfada gösterilecek blog sayısı
+    var pageCount = (int)Math.Ceiling((double)Model.Count / pageSize);
+
+    var httpContext = ViewContext.HttpContext;
+    var pageNumber = 1; // Varsayılan sayfa numarası
+    if (httpContext.Request.Query.ContainsKey("page") && int.TryParse(httpContext.Request.Query["page"], out int parsedPage)) //
+    {
+        pageNumber = parsedPage;
+    }
+
+    var blogsToShow = Model.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+}
+
+
+<div class="col-lg-8">
+    <div class="all-blog-posts">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-6">
+                    <div class="blog-post">
+                        <div class="blog-thumb">
+                            <a asp-action="BlogDetails" asp-controller="Blog" asp-route-id="@item.BlogId"><img src="@item.BlogThumbnailImage" alt=""></a>
+                        </div>
+                        <div class="down-content">
+                            <span>@item.Category.CategoryName</span>
+                            <a asp-action="BlogDetails" asp-controller="Blog"><h4>@item.BlogTitle</h4></a>
+                            <ul class="post-info">
+                                <li>@item.BlogCreateDate.ToString("dd-MMM-yyyy")</li>
+                                <li>12 yorum</li>
+                            </ul>
+                            <p>
+                                @if (item.BlogContent.Length > 130)
+                                {
+                                    @Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))<p>...</p>
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.BlogContent)
+                                }
+                                 
+                            </p>
+                            <div class="post-options">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <ul class="post-tags">
+                                            <li><i class="fa fa-tags"></i></li>
+                                            <li>@item.BlogTags</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-lg-12">
+                <ul class="page-numbers">
+                    @for (int i = 1; i <= pageCount; i++)
+                    {
+                        <li @(i == pageNumber ? "class=active" : "")><a href="?page=@i">@i</a></li>
+                        //Seçilen satırı işaretleme
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
