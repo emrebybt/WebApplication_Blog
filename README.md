@@ -28,8 +28,7 @@ The personal blog site I developed with Asp .Net was made by minimising dependen
 - Bootstrap
   
 ## Kullanım/Örnekler
-
-```javascript
+```json
 {
   "ConnectionStrings": {
     "ConnStr": "Bu kısmı kendinize göre ayarlamanız gereklidir"
@@ -42,7 +41,6 @@ The personal blog site I developed with Asp .Net was made by minimising dependen
   },
   "AllowedHosts": "*"
 }
-}
+
 ```
 
-  
