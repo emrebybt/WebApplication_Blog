@@ -13,6 +13,7 @@ namespace BuisnessLayer.Concrete
     {
         private readonly IBlogDal _blogDal;
 
+
         public BlogManager(IBlogDal blogDal)
         {
             _blogDal = blogDal;

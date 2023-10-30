@@ -30,7 +30,7 @@ namespace BuisnessLayer.Concrete
 
         public CommentReply GetById(int id)
         {
-            throw new NotImplementedException();
+            return _commentReplyDal.GetById(id);
         }
 
         public List<CommentReply> GetList()
@@ -45,7 +45,7 @@ namespace BuisnessLayer.Concrete
 
         public void Update(CommentReply t)
         {
-            throw new NotImplementedException();
+            _commentReplyDal.Update(t);
         }
     }
 }

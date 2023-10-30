@@ -28,9 +28,9 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th> Kategori İsmi </th>
-                                        <th> Kategori Açıklaması</th>
-                                        <th> Kategorideki Blog Sayısı </th>
+                                        <th> Yorum Yapan </th>
+                                        <th> Email</th>
+                                        <th> Yorum Tarihi </th>
                                         <th> Status </th>
                                         <th> İşlem </th>
                                     </tr>
@@ -44,7 +44,7 @@
                                                 @item.CommentUserName
                                             </td>
                                             <td> @item.CommentEmail </td>
-                                            <td>  </td>
+                                            <td> @item.CommentDate.ToString("dd-MMM-yyyy") </td>
                                             <td>
                                                 <label class="badge  @(item.CommentStatus == true ? "badge-gradient-success":"badge-gradient-danger")">@(item.CommentStatus == true ? "Online" : "Offline")</label>
                                             </td>

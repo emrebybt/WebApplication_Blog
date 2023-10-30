@@ -26,8 +26,10 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-primary" onclick="myFunction(@item.ReplyCommentId)">Yorumu gör</a>
+                                    <a asp-controller="AdmnComment" asp-action="ReplyCommentStatus" asp-route-id="@item.ReplyCommentId" class="btn btn-sm btn-outline-@(item.CommentStatus == true ? "danger": "success")">@(item.CommentStatus == true ? "Kaldır" : "Yayınla")</a>
 
                                 </td>
+
 
                             </tr>
                             <tr>

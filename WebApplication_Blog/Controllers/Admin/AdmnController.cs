@@ -1,12 +1,16 @@
 ﻿using AutoMapper;
 using BuisnessLayer.Abstract;
+using DataAccessLayer.Identity;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication_Blog.ViewModels;
 
 namespace WebApplication_Blog.Controllers.Admin
 {
+    [Authorize]
     public class AdmnController : Controller
     {
         private readonly IBlogService _blogService;
@@ -14,12 +18,14 @@ namespace WebApplication_Blog.Controllers.Admin
         private readonly ICommentService _commentService;
         private readonly ICategoryService _categoryService;
 
+
         public AdmnController(IBlogService blogService, IMapper mapper, ICommentService commentService, ICategoryService categoryService)
         {
             _blogService = blogService;
             _mapper = mapper;
             _commentService = commentService;
             _categoryService = categoryService;
+
         }
 
         public IActionResult Index()
@@ -80,5 +86,7 @@ namespace WebApplication_Blog.Controllers.Admin
             ViewBag.Categories = new SelectList(_categoryService.GetList(), "CategoryId", "CategoryName");
             return View();
         }
+
+        
     }
 }

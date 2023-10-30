@@ -1,20 +1,24 @@
 ﻿using AutoMapper;
 using BuisnessLayer.Abstract;
 using EntityLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication_Blog.ViewModels;
 
 namespace WebApplication_Blog.Controllers.Admin
 {
+    [Authorize]
     public class AdmnCommentController : Controller
     {
         private readonly ICommentDal _commentDal;
         private readonly IMapper _mapper;
+        private readonly ICommentReplyService _replyService;
 
-        public AdmnCommentController(ICommentDal commentDal, IMapper mapper)
+        public AdmnCommentController(ICommentDal commentDal, IMapper mapper, ICommentReplyService replyService)
         {
             _commentDal = commentDal;
             _mapper = mapper;
+            _replyService = replyService;
         }
 
         public IActionResult Index()
@@ -35,6 +39,20 @@ namespace WebApplication_Blog.Controllers.Admin
             }
             _commentDal.Update(comment);
             return RedirectToAction("Index");
+        }
+        public IActionResult ReplyCommentStatus(int id)
+        {
+            var replycomment = _replyService.GetById(id);
+            if (replycomment.CommentStatus == true)
+            {
+                replycomment.CommentStatus = false;
+            }
+            else
+            {
+                replycomment.CommentStatus = true;
+            }
+            _replyService.Update(replycomment);
+            return RedirectToAction("Edit", new {id= replycomment.CommentId});
         }
         public IActionResult Edit(int id)
         {

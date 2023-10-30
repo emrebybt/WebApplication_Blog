@@ -13,7 +13,7 @@ namespace WebApplication_Blog.ViewComponents.Reply
         }
         public IViewComponentResult Invoke(int id)
         {
-            var value = _commentReplyService.GetReplyList(id);
+            var value = _commentReplyService.GetReplyList(id).Where(x=>x.CommentStatus == true).ToList();
             return View(value);
         }
     }

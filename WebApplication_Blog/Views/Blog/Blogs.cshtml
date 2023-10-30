@@ -33,18 +33,13 @@
                             <a asp-action="BlogDetails" asp-controller="Blog"><h4>@item.BlogTitle</h4></a>
                             <ul class="post-info">
                                 <li>@item.BlogCreateDate.ToString("dd-MMM-yyyy")</li>
-                                <li>12 yorum</li>
+                                <li><vc:Comment-Count id=@item.BlogId></vc:Comment-Count></li> Adet Yorum
                             </ul>
                             <p>
-                                @if (item.BlogContent.Length > 130)
-                                {
-                                    @Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))<p>...</p>
-                                }
-                                else
-                                {
-                                    @Html.Raw(item.BlogContent)
-                                }
-                                 
+                               
+                                    @Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))
+                                <p>...</p>
+                              
                             </p>
                             <div class="post-options">
                                 <div class="row">

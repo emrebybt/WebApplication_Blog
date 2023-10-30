@@ -3,30 +3,30 @@
 <div class="col-lg-12">
     <div class="sidebar-item submit-comment">
         <div class="sidebar-heading">
-            <h2>Your comment</h2>
+            <h2>Yorumunuz</h2>
         </div>
         <div class="content">
-            <form id="comment" asp-controller="Comment" asp-action="AddComment" method="post">
+            <form id="comment">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <input asp-for="BlogId" type="hidden" value="@Model.BlogId">
                         <fieldset>
-                            <input asp-for="CommentUserName" type="text" id="name" placeholder="Your name" required="">
+                            <input asp-for="CommentUserName" type="text" id="name" placeholder="Adınız" required="">
                         </fieldset>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                    <fieldset>
-                        <input asp-for="CommentEmail" type="text" id="email" placeholder="Your email" required="">
-                    </fieldset>
-                    </div>
-                    <div class="col-lg-12">
                         <fieldset>
-                            <textarea asp-for="CommentContent" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                            <input asp-for="CommentEmail" type="text" id="email" placeholder="E-posta Adresiniz" required="">
                         </fieldset>
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
-                            <button type="submit" id="form-submit" class="main-button">Gönder</button>
+                            <textarea asp-for="CommentContent" rows="6" id="message" placeholder="Yorumunuzu buraya yazın" required=""></textarea>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                        <fieldset>
+                            <button type="button" id="form-submit" onclick="AddComment()" class="main-button">Gönder</button>
                         </fieldset>
                     </div>
                 </div>
@@ -34,3 +34,4 @@
         </div>
     </div>
 </div>
+

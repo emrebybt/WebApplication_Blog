@@ -11,6 +11,7 @@ namespace WebApplication_Blog.ViewModels
         public string BlogImage { get; set; }
         public DateTime BlogCreateDate { get; set; }
         public bool BlogStatus { get; set; }
+        public int CommentCount { get; set; }
         public string BlogTags { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }

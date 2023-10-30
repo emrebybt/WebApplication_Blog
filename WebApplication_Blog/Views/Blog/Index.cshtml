@@ -20,18 +20,15 @@
                             <a asp-route-id="@item.BlogId" asp-action="BlogDetails" asp-controller="Blog"><h4>@item.BlogTitle</h4></a>
                             <ul class="post-info">
                                 <li>@item.BlogCreateDate.ToString("dd-MMM-yyyy")</li>
-                                <li>12 Comments</li>
+                                <li><vc:Comment-Count id=@item.BlogId></vc:Comment-Count></li> Adet Yorum
                             </ul>
+                            <br>
+                            <br>
                             <div>
-                                @if (Html.Raw(item.BlogContent).ToString().Count() > 130)
-                                {
-                                    @Html.Raw(item.BlogContent.Substring(0,130))
+
+                                @Html.Raw(item.BlogContent.Substring(0,item.BlogContent.Substring(0,130).LastIndexOf(" ")))
                                     <span>...</span>
-                                }
-                                else
-                                {
-                                    @Html.Raw(item.BlogContent)
-                                }
+
                             </div>
                             <div class="post-options">
                                 <div class="row">

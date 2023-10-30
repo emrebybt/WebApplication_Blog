@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BuisnessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication_Blog.ViewModels;
 
 namespace WebApplication_Blog.Controllers.Admin
 {
+    [Authorize]
     public class AdmnCategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

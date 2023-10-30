@@ -1,4 +1,6 @@
-﻿using EntityLayer.Concrete;
+﻿using DataAccessLayer.Identity;
+using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Data
 {
-    public class BlogContext : DbContext
+    public class BlogContext : IdentityDbContext<AppUser, AppRole, int>
     {
         //Database bağlantısı
         public BlogContext(DbContextOptions<BlogContext> options) : base(options) { }

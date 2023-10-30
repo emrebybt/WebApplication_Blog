@@ -6,7 +6,7 @@
             <h2>Your comment</h2>
         </div>
         <div class="content">
-            <form id="comment" asp-controller="Comment" asp-action="AddReplyComment" method="post">
+            <form id="replycomment">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <input asp-for="CommentId" type="hidden" value="@Model.CommentId">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-lg-12">
                         <fieldset>
-                            <button type="submit" id="form-submit" class="main-button">Gönder</button>
+                            <button type="button" id="form-submit" onclick="AddReplyComment()" class="main-button">Gönder</button>
                         </fieldset>
                     </div>
                 </div>
